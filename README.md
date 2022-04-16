@@ -1,6 +1,6 @@
 # Asset Registry with Hyperledger Fabric 2.3+
 
-**Our Goal** : In this project we are going to implement simple asset registry where we are going to have some assets and, those assets are going to be transferred, created or destroyed. In our example there are **two organizations** and **one orderer**.
+**Our Goal**: In this project, we are going to implement a simple asset registry where we are going to have some assets and, those assets are going to be transferred, created, or destroyed. In our example, there are **two organizations** and **one orderer**.
 
 ## Hyperledger Fabric 2.3+ Setup
 
@@ -27,7 +27,7 @@ Make sure to log out and log back in to ensure correct permissions are set for t
 ```
 $ docker ps 
 ```
-If that works correctly i.e. does not throw any errors, we may proceed. Otherwise, first setup the permissions through usermod above.
+If that works correctly i.e. does not throw any errors, we may proceed. Otherwise, first set up the permissions through the usermod above.
 
 Let’s now setup **node**. The latest supported version should be mentioned on the Fabric site.
 
@@ -66,13 +66,13 @@ This will clone the repo and setup docker images using Docker Compose
 * **Blockchain technology** is also referred to as **Distributed Ledger Technology**, or **DLT**, as it works on a **ledger** that is distributed on **multiple peers**. 
 <br/>
 
-* Hyperledger fabric is ideal for building a **permissioned**, **private** blockchain business network. By **private**, it means that it should not be publicly open for everyone to run a peer or transact on the network. Enterprises need more control on their data access policies. They also need a **permissioned** network so they can implement access control as per their own requirements.
+* Hyperledger fabric is ideal for building a **permissioned**, **private** blockchain business network. By **private**, it means that it should not be publicly open for everyone to run a peer or transact on the network. Enterprises need more control over their data access policies. They also need a **permissioned** network so they can implement access control as per their requirements.
 <br/>
 
-* **High Level Architecture**: The permission issuer issues or revokes permissions for all participants and infrastructure components of the network. This permission or access control in Fabric is based on **X509 PKI** infrastructure. Which means there is a trusted certificate authority that issues certificates to all participants.
+* **High-Level Architecture**: The permission issuer issues or revokes permissions for all participants and infrastructure components of the network. This permission or access control in Fabric is based on **X509 PKI** infrastructure. This means there is a trusted certificate authority that issues certificates to all participants.
 <br/>
 
-![](assets/Screenshot260.png)
+    ![](assets/Screenshot260.png)
 <br/>
 
 ### **The concept of Network**
@@ -80,18 +80,18 @@ This will clone the repo and setup docker images using Docker Compose
 * **Multiple organizations** can form a **network**
 <br/>
 
-![](assets/Screenshot261.png)
+    ![](assets/Screenshot261.png)
 <br/>
 
 #### **MSP (Membership Service Provider)**
- Each organization can have its own **membership services provider** which will issue and revoke identities for users and peers of that organization. This membership service provider can be a **certificate authority hierarchy or a single root certificate authority**. In order for other organizations to validate transactions by each other, they need to be set up by having trusted root certificate authorities pre-configured on them in something called an MSP (Membership Service Provider).
+ Each organization can have its own **membership services provider** which will issue and revoke identities for users and peers of that organization. This membership service provider can be a **certificate authority hierarchy or a single root certificate authority**. For other organizations to validate transactions by each other, they need to be set up by having trusted root certificate authorities pre-configured on them in something called an MSP (Membership Service Provider).
 <br/>
 
 ![](assets/Screenshot262.png)
 <br/>
 
 #### Channels
- In fabric there is a concept of **channels**. Each peer can join one or more channels. If there are some special transactions that need to be shared only by org1 and org2 and they don’t want any peer from org3 to read it, both the organizations can join a separate channel and be present on the main channel as well. **This provides privacy that does not exist in public blockchains**. **Internally a separate ledger is maintained on each peer for each channel that it is on**.
+ In fabric, there is a concept of **channels**. Each peer can join one or more channels. If some special transactions need to be shared only by org1 and org2 and they don’t want any peer from org3 to read them, both the organizations can join a separate channel and be present on the main channel as well. **This provides privacy that does not exist in public blockchains**. **Internally a separate ledger is maintained on each peer for each channel that it is on**.
 <br/>
 
 ![](assets/Screenshot263.png)
@@ -107,19 +107,19 @@ Each peer maintains a ledger. A ledger is essentially two things:
 
 By having a **state database** it is easier to query the ledger as the current state is pre-calculated and stored on each peer.
 
-The state database is essentially a key value based datastore(an instance of Apache CouchDB). The state database contains the final state of the ledger after applying all transactions recorded in blockchain. It is therefore like a cache. It helps make querying the blockchain faster, as the state is pre-calculated. It also gives developers an easier programming model to work with. Developers writing chaincode do not need to write transactions directly on blockchain, but rather, write to state in state database (the required transactions are generated under the hood).
+The state database is essentially a key value-based datastore(an instance of Apache CouchDB). The state database contains the final state of the ledger after applying all transactions recorded in the blockchain. It is therefore like a cache. It helps make querying the blockchain faster, as the state is pre-calculated. It also gives developers an easier programming model to work with. Developers writing chaincode do not need to write transactions directly on the blockchain, but rather, write to state in state database (the required transactions are generated under the hood).
 
 The peers communicate with each other to ensure their final state is the same at all times using the **gossip protocol**.
 <br/>
 
 #### **Chaincode**
 
-**This is a piece of code that is part of the ledger**. The chaincode provides logic on what, how, when, and by whom things can be written on ledger. It is essentially business rules coded to store data onto the ledger. For example the chaincode can make sure an account holder has enough balance before he transfers an amount to another account.
+**This is a piece of code that is part of the ledger**. The chaincode provides logic on what, how, when, and by whom things can be written on the ledger. It is essential business rules are coded to store data in the ledger. For example, the chaincode can make sure an account holder has enough balance before he transfers an amount to another account.
 <br/>
 
 #### **Ordering Service**
 
-**Ordering Service** is a **distributed (solo in dev mode) service** that is responsible for **organizing endorsed transactions into sequenced blocks and distributing to all peers**. This service is run on multiple nodes. Typically each org will have at least one node of ordering service to ensure they are a part of the end to end transaction processing.
+**Ordering Service** is a **distributed (solo in dev mode) service** that is responsible for **organizing endorsed transactions into sequenced blocks and distributing them to all peers**. This service is run on multiple nodes. Typically each org will have at least one node of ordering service to ensure they are a part of the end-to-end transaction processing.
 
 <br/>
 
@@ -129,10 +129,11 @@ Let's take a look at high-level steps carried out in transaction processing. Bel
 
 * Client App prepares the transaction signed by the user
 * Client App connects to endorsing peers(as per endorsement policy) to collected signed endorsements on the transaction output. The peers simulate the transaction and return a signed endorsement
-* Client App submits the endorsed transaction to ordering service, which puts it into a valid block and distributes to all peers
+* Client App submits the endorsed transaction to the ordering service, which puts it into a valid block and distributes it to all peers
 <br/>
 
-![](assets/Screenshot264.png)
+    ![](assets/Screenshot264.png)
+
 <br/>
 
 ### **Developement Components**
@@ -141,33 +142,34 @@ There are 3 main development components for a basic end-to-end development flow:
 
 * Configure a `dev network`
 * Write and deploy `chaincode` on the `dev network`
-* Write application code that can invoke chaincode transactions on dev network
+* Write application code that can invoke chaincode transactions on the dev network
 <br/>
 
-![](assets/Screenshot265.png)
-<br/>
+    ![](assets/Screenshot265.png)
+    <br/>
 
-![](assets/Screenshot266.png)
-<br/>
+    ![](assets/Screenshot266.png)
+    <br/>
 
-![](assets/Screenshot267.png)
-<br/>
+    ![](assets/Screenshot267.png)
+    <br/>
 
-![](assets/Screenshot268.png)
+    ![](assets/Screenshot268.png)
+
 <br/>
 
 ### **Understanding Docker**
 
-* Hyperledger Fabric forms a distributed network and in order to run on a single machine, **we use docker containers to run individual distributed components**. Each component runs in a separate container instance and connects to other containers to form a network.
+* Hyperledger Fabric forms a distributed network and to run on a single machine, **we use docker containers to run individual distributed components**. Each component runs in a separate container instance and connects to other containers to form a network.
 <br/>
 
-* A **Docker container image** is a lightweight, standalone, **executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings**. Understanding docker and docker-compose is crucial to understanding the dev environment we will use in this course.
+* A **Docker container image** is a lightweight, standalone, **executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings**. Understanding Docker and docker-compose are crucial to understanding the dev environment we will use in this course.
 <br/>
 
-* Please visit the following links to get a basic knowledge about docker: [What Is Docker And How It Works?](https://www.youtube.com/watch?v=rOTqprHv1YE) and [Make a Local Docker Container for php](https://www.youtube.com/watch?v=YFl2mCHdv24&t=359s)
+* Please visit the following links to get the basic knowledge about docker: [What Is Docker And How It Works?](https://www.youtube.com/watch?v=rOTqprHv1YE) and [Make a Local Docker Container for php](https://www.youtube.com/watch?v=YFl2mCHdv24&t=359s)
 <br/>
 
-* For development purposes we will run a small network on our machine in docker containers called **basic-network** and which is provided in official hyperledger fabric-samples repo  (**link**: https://github.com/hyperledger/fabric-samples)
+* For development purposes we will run a small network on our machine in docker containers called **basic-network** and which is provided in the official hyperledger fabric-samples repo  (**link**: https://github.com/hyperledger/fabric-samples)
 
 <br/>
 
@@ -176,15 +178,15 @@ The components of a basic network are:
 #### PEER
 
 * **peer container**: Runs the peer node
-* **couch db container**: Stores the state database of peer node
+* **couch db container**: Stores the state database of the peer node
 
 #### ORDERER
 
-* **orderer container**: Solo orderer node to keep dev environment simple. In a real-world network the ordering service is distributed with multiple nodes communicating with each other
+* **orderer container**: Solo orderer node to keep dev environment simple. In a real-world network, the ordering service is distributed with multiple nodes communicating with each other
 
 #### CERTIFICATE AUTHORITY
 
-* **fabric-ca container**: root certificate authority for issuing membership certificates to all nodes and users. Since we will use single CA, our network is comprised of a single org called **“example dot com”**
+* **fabric-ca container**: root certificate authority for issuing membership certificates to all nodes and users. Since we will use a single CA, our network is comprised of a single org called **“example dot com”**
 
 #### TOOLING
 
@@ -225,7 +227,7 @@ $ echo $FABRIC_CFG_PATH
 ```
 ![](assets/Screenshot100.png)
 
-* Now, we must make sure that fabric commands are in the `PATH`. The following commands adds it to the current session but we should add it to our `~/.bashrc` file as well for future use
+* Now, we must make sure that fabric commands are in the `PATH`. The following commands add it to the current session but we should add it to our `~/.bashrc` file as well for future use
 
 ```
 $ peer   # ensure it's there. If not, set the path 
@@ -234,7 +236,7 @@ peer   # should work now
 
 ```
 
-* Now, let’s create a pacakge from our chaincode source
+* Now, let’s create a package from our chaincode source
 
 ```
 $ peer lifecycle chaincode package basic.tar.gz \
@@ -331,7 +333,7 @@ $ peer lifecycle chaincode approveformyorg \
 
 ```
 
-* Let’s commit the chnages made to the chaincode. We have to specify peers here explicitly
+* Let’s commit the changes made to the chaincode. We have to specify peers here explicitly
 
 ```
 $ peer lifecycle chaincode commit \
@@ -384,7 +386,7 @@ $ docker volume ls
 $ docker images 
 $ docker container ls 
 
-# And just for final measure 
+# And just for the final measure 
 $ docker system prune --all 
 
 
@@ -443,7 +445,7 @@ exports.buildCCPOrg1 = function() {
 
 ```
 
-We then create a function for creating a wallet. This wallet will hold the keys and other crypto material used througout the code. The wallet can store in-memory (for testing) or in a folder (which is what we will use)
+We then create a function for creating a wallet. This wallet will hold the keys and other crypto material used throughout the code. The wallet can store in memory (for testing) or in a folder (which is what we will use)
 
 ```javascript 
 exports.buildWallet = async function (Wallets, walletPath) { 
@@ -462,7 +464,7 @@ exports.buildWallet = async function (Wallets, walletPath) {
 
 ```
 
-There’s also a function to pretty-print javascript. This is straight-forward.
+There’s also a function to pretty-print javascript. This is straightforward.
 
 ```javascript
 
@@ -473,9 +475,9 @@ exports.prettyJSONString = function(inputString) {
 
 ### Performing Administrative Actions
 
-There are some functions that will set up the admins and users. Logic for this is in the `caActions.js`. Let’s take a look at those here.
+Some functions will set up the admins and users. The logic for this is in the `caActions.js`. Let’s take a look at those here.
 
-First function is to load the credentials used for performing actions.
+The first function is to load the credentials used for performing actions.
 
 ```javascript
 function buildCAClient(FabricCAServices, ccp, caHostName) { 
@@ -505,7 +507,7 @@ const caClient = buildCAClient(
 
 ```
 
-We also need to create an administrative account. This will be a onetime task. We first create the enrollment information along with its X.509 certificate. Then we put it in the wallet.
+We also need to create an administrative account. This will be a one-time task. We first create the enrollment information along with its X.509 certificate. Then we put it in the wallet.
 
 ```javascript
 async function enrollAdmin(caClient, wallet, orgMspId) { 
@@ -531,7 +533,7 @@ async function enrollAdmin(caClient, wallet, orgMspId) {
 
 ```
 
-Creating an everyday user is similar but it’s done more often. We load the admin credentials, use those to create the user and save the user’s credentials in the wallet.
+Creating an everyday user is similar but it’s done more often. We load the admin credentials, use those to create the user, and save the user’s credentials in the wallet.
 
 ```javascript
 async function registerAndEnrollUser(caClient, wallet, orgMspId, userId, affiliation){ 
@@ -575,7 +577,7 @@ async function registerAndEnrollUser(caClient, wallet, orgMspId, userId, affilia
 
 ```
 
-There are two more function `getAdmin` and `getUser` which are basically interfaces for the above two functions.
+There are two more functions `getAdmin` and `getUser` which are interfaces for the above two functions.
 
 Finally, we have some helper code so that we can call these functions from the command line.
 
@@ -599,9 +601,9 @@ if (args[2] === 'admin') {
 
 ### Performing Actions on the Ledger Itself
 
-Once we have the users and admins, we can perform the actual chaincode logic. Logic for this is in the `ledgerActions.js`.
+Once we have the users and admins, we can perform the actual chaincode logic. The logic for this is in the `ledgerActions.js`.
 
-Relevant fragments of code are discussed here. First part is the connection information. Think of this as being similar to creating a database connection.
+Relevant fragments of code are discussed here. The first part is the connection information. Think of this as being similar to creating a database connection.
 
 ```javascript
 const ccp = helper.buildCCPOrg1();
@@ -623,7 +625,7 @@ const contract = network.getContract(chaincodeName);    // basic
 
 ```
 
-Using the actual chaincode functions is no extremely easy. Simply call the relevant function like so:
+Using the actual chaincode functions is not extremely easy. Simply call the relevant function like so:
 
 ```javascript
 await contract.submitTransaction('InitLedger'); 
@@ -665,10 +667,10 @@ node ledgerActions.js CreateAsset
 # References
 <br/>
 
-1. [Become a Blockchain Developer (A course on **edcucative.io**)](https://www.educative.io/courses/hands-on-blockchain-hyperledger-fabric)
+1. [Become a Blockchain Developer (A course on **educative. io**)](https://www.educative.io/courses/hands-on-blockchain-hyperledger-fabric)
 <br/>
 
-2. [Hyperledger Fabric 2.x - First Practical Blockchain: A course instructed by **Mohammad Nauman** on **Udemy**](https://www.udemy.com/course/hyperledger-fabric-composer-first-practical-blockchain/)
+2. [Hyperledger Fabric 2. x - First Practical Blockchain: A course instructed by **Mohammad Nauman** on **Udemy**](https://www.udemy.com/course/hyperledger-fabric-composer-first-practical-blockchain/)
 <br/>
 
 4. [HYPERLEDGER FABRIC: Writing Your First Chaincode](https://hyperledger-fabric.readthedocs.io/en/release-2.2/chaincode4ade.html#)
