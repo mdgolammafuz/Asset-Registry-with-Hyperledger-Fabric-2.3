@@ -72,7 +72,7 @@ This will clone the repo and setup docker images using Docker Compose
 * **High Level Architecture**: The permission issuer issues or revokes permissions for all participants and infrastructure components of the network. This permission or access control in Fabric is based on **X509 PKI** infrastructure. Which means there is a trusted certificate authority that issues certificates to all participants.
 <br/>
 
-    ![](assets/Screenshot260.png)
+![](assets/Screenshot260.png)
 <br/>
 
 ### **The concept of Network**
@@ -80,7 +80,7 @@ This will clone the repo and setup docker images using Docker Compose
 * **Multiple organizations** can form a **network**
 <br/>
 
-    ![](assets/Screenshot261.png)
+![](assets/Screenshot261.png)
 <br/>
 
 #### **MSP (Membership Service Provider)**
@@ -132,8 +132,7 @@ Let's take a look at high-level steps carried out in transaction processing. Bel
 * Client App submits the endorsed transaction to ordering service, which puts it into a valid block and distributes to all peers
 <br/>
 
-    ![](assets/Screenshot264.png)
-
+![](assets/Screenshot264.png)
 <br/>
 
 ### **Developement Components**
@@ -145,17 +144,16 @@ There are 3 main development components for a basic end-to-end development flow:
 * Write application code that can invoke chaincode transactions on dev network
 <br/>
 
-    ![](assets/Screenshot265.png)
-    <br/>
+![](assets/Screenshot265.png)
+<br/>
 
-    ![](assets/Screenshot266.png)
-    <br/>
+![](assets/Screenshot266.png)
+<br/>
 
-    ![](assets/Screenshot267.png)
-    <br/>
+![](assets/Screenshot267.png)
+<br/>
 
-    ![](assets/Screenshot268.png)
-
+![](assets/Screenshot268.png)
 <br/>
 
 ### **Understanding Docker**
