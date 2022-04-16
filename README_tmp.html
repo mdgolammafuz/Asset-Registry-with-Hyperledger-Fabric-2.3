@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="asset-registry-with-hyperledger-fabric-23">Asset Registry with Hyperledger Fabric 2.3+</h1>
+<p><strong>Our Goal</strong> : In this project we are going to implement simple asset registry where we are going to have some assets and, those assets are going to be transferred, created or destroyed. In our example there are <strong>two organizations</strong> and <strong>one orderer</strong>.</p>
+<h2 id="hyperledger-fabric-23-setup">Hyperledger Fabric 2.3+ Setup</h2>
+<p>Make sure we are using the bash shell. If we are using <code>fish</code> or <code>zsh</code>, just enter the following command to enter the bash shell</p>
+<pre class="hljs"><code><div>$ bash
+</div></code></pre>
+<h3 id="setting-up-the-environment"><strong>Setting up the Environment</strong></h3>
+<p>Let’s first go ahead and setup <strong>docker</strong> and some <strong>prerequisites</strong></p>
+<pre class="hljs"><code><div>$ sudo apt install git curl jq 
+$ sudo apt-get -y install docker-compose
+$ docker --version 
+$ sudo systemctl start docker
+$ sudo systemctl enable docker 
+$ echo $USER    # ensure your username shows here 
+$ sudo usermod -a -G docker $USER
+</div></code></pre>
+<p>Make sure to log out and log back in to ensure correct permissions are set for the user. Otherwise, docker gives errors.</p>
+<pre class="hljs"><code><div>$ docker ps 
+</div></code></pre>
+<p>If that works correctly i.e. does not throw any errors, we may proceed. Otherwise, first setup the permissions through usermod above.</p>
+<p>Let’s now setup <strong>node</strong>. The latest supported version should be mentioned on the Fabric site.</p>
+<pre class="hljs"><code><div>$ curl -fsSL https://deb.nodesource.com/setup_12.x | sudo -E bash - 
+$ sudo apt update 
+$ sudo apt-get install -y nodejs  
+</div></code></pre>
+<p>Ensure that correct versions of Node and NPM are installed</p>
+<pre class="hljs"><code><div>$ npm  --version     
+$ node --version   
+</div></code></pre>
+<h3 id="downloading-and-installing-fabric-binaries"><strong>Downloading and Installing Fabric Binaries</strong></h3>
+<p>Let’s first create a fabric directory to ensure everything remains in one place</p>
+<pre class="hljs"><code><div>$ mkdir ~/fabric 
+$ cd fabric 
+</div></code></pre>
+<p>Let’s download the Fabric binaries in this folder</p>
+<pre class="hljs"><code><div>$ curl -sSL https://bit.ly/2ysbOFE | bash -s -- 2.3.1 
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot96.png" alt=""></p>
+<p>This will clone the repo and setup docker images using Docker Compose</p>
+<h2 id="hyperledger-fabric-basic-concepts"><em><strong>Hyperledger Fabric: Basic Concepts</strong></em></h2>
+<h3 id="high-level-architecture"><strong>High Level Architecture</strong></h3>
+<ul>
+<li>
+<p><strong>Blockchain technology</strong> is also referred to as <strong>Distributed Ledger Technology</strong>, or <strong>DLT</strong>, as it works on a <strong>ledger</strong> that is distributed on <strong>multiple peers</strong>.
+<br/></p>
+</li>
+<li>
+<p>Hyperledger fabric is ideal for building a <strong>permissioned</strong>, <strong>private</strong> blockchain business network. By <strong>private</strong>, it means that it should not be publicly open for everyone to run a peer or transact on the network. Enterprises need more control on their data access policies. They also need a <strong>permissioned</strong> network so they can implement access control as per their own requirements.
+<br/></p>
+</li>
+<li>
+<p><strong>High Level Architecture</strong>: The permission issuer issues or revokes permissions for all participants and infrastructure components of the network. This permission or access control in Fabric is based on <strong>X509 PKI</strong> infrastructure. Which means there is a trusted certificate authority that issues certificates to all participants.
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot260.png" alt="">
+<br/></p>
+</li>
+</ul>
+<h3 id="the-concept-of-network"><strong>The concept of Network</strong></h3>
+<ul>
+<li>
+<p><strong>Multiple organizations</strong> can form a <strong>network</strong>
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot261.png" alt="">
+<br/></p>
+</li>
+</ul>
+<h4 id="msp-membership-service-provider"><strong>MSP (Membership Service Provider)</strong></h4>
+<p>Each organization can have its own <strong>membership services provider</strong> which will issue and revoke identities for users and peers of that organization. This membership service provider can be a <strong>certificate authority hierarchy or a single root certificate authority</strong>. In order for other organizations to validate transactions by each other, they need to be set up by having trusted root certificate authorities pre-configured on them in something called an MSP (Membership Service Provider).
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot262.png" alt="">
+<br/></p>
+<h4 id="channels">Channels</h4>
+<p>In fabric there is a concept of <strong>channels</strong>. Each peer can join one or more channels. If there are some special transactions that need to be shared only by org1 and org2 and they don’t want any peer from org3 to read it, both the organizations can join a separate channel and be present on the main channel as well. <strong>This provides privacy that does not exist in public blockchains</strong>. <strong>Internally a separate ledger is maintained on each peer for each channel that it is on</strong>.
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot263.png" alt="">
+<br/></p>
+<h4 id="ledger"><strong>Ledger</strong></h4>
+<p>Each peer maintains a ledger. A ledger is essentially two things:</p>
+<ul>
+<li>
+<p>Timestamped transactions organized in blocks and stored</p>
+</li>
+<li>
+<p>A State Database which is the computed outcome of all transactions executed in order</p>
+</li>
+</ul>
+<p>By having a <strong>state database</strong> it is easier to query the ledger as the current state is pre-calculated and stored on each peer.</p>
+<p>The state database is essentially a key value based datastore(an instance of Apache CouchDB). The state database contains the final state of the ledger after applying all transactions recorded in blockchain. It is therefore like a cache. It helps make querying the blockchain faster, as the state is pre-calculated. It also gives developers an easier programming model to work with. Developers writing chaincode do not need to write transactions directly on blockchain, but rather, write to state in state database (the required transactions are generated under the hood).</p>
+<p>The peers communicate with each other to ensure their final state is the same at all times using the <strong>gossip protocol</strong>.
+<br/></p>
+<h4 id="chaincode"><strong>Chaincode</strong></h4>
+<p><strong>This is a piece of code that is part of the ledger</strong>. The chaincode provides logic on what, how, when, and by whom things can be written on ledger. It is essentially business rules coded to store data onto the ledger. For example the chaincode can make sure an account holder has enough balance before he transfers an amount to another account.
+<br/></p>
+<h4 id="ordering-service"><strong>Ordering Service</strong></h4>
+<p><strong>Ordering Service</strong> is a <strong>distributed (solo in dev mode) service</strong> that is responsible for <strong>organizing endorsed transactions into sequenced blocks and distributing to all peers</strong>. This service is run on multiple nodes. Typically each org will have at least one node of ordering service to ensure they are a part of the end to end transaction processing.</p>
+<br>
+<h3 id="transaction-processing"><strong>Transaction Processing</strong></h3>
+<p>Let's take a look at high-level steps carried out in transaction processing. Below is the list of high-level steps being carried out when a transaction needs to be applied to the ledger</p>
+<ul>
+<li>
+<p>Client App prepares the transaction signed by the user</p>
+</li>
+<li>
+<p>Client App connects to endorsing peers(as per endorsement policy) to collected signed endorsements on the transaction output. The peers simulate the transaction and return a signed endorsement</p>
+</li>
+<li>
+<p>Client App submits the endorsed transaction to ordering service, which puts it into a valid block and distributes to all peers
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot264.png" alt=""></p>
+</li>
+</ul>
+<br>
+<h3 id="developement-components"><strong>Developement Components</strong></h3>
+<p>There are 3 main development components for a basic end-to-end development flow:</p>
+<ul>
+<li>
+<p>Configure a <code>dev network</code></p>
+</li>
+<li>
+<p>Write and deploy <code>chaincode</code> on the <code>dev network</code></p>
+</li>
+<li>
+<p>Write application code that can invoke chaincode transactions on dev network
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot265.png" alt="">
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot266.png" alt="">
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot267.png" alt="">
+<br/></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot268.png" alt=""></p>
+</li>
+</ul>
+<br>
+<h3 id="understanding-docker"><strong>Understanding Docker</strong></h3>
+<ul>
+<li>
+<p>Hyperledger Fabric forms a distributed network and in order to run on a single machine, <strong>we use docker containers to run individual distributed components</strong>. Each component runs in a separate container instance and connects to other containers to form a network.
+<br/></p>
+</li>
+<li>
+<p>A <strong>Docker container image</strong> is a lightweight, standalone, <strong>executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings</strong>. Understanding docker and docker-compose is crucial to understanding the dev environment we will use in this course.
+<br/></p>
+</li>
+<li>
+<p>Please visit the following links to get a basic knowledge about docker: <a href="https://www.youtube.com/watch?v=rOTqprHv1YE">What Is Docker And How It Works?</a> and <a href="https://www.youtube.com/watch?v=YFl2mCHdv24&amp;t=359s">Make a Local Docker Container for php</a>
+<br/></p>
+</li>
+<li>
+<p>For development purposes we will run a small network on our machine in docker containers called <strong>basic-network</strong> and which is provided in official hyperledger fabric-samples repo  (<strong>link</strong>: https://github.com/hyperledger/fabric-samples)</p>
+</li>
+</ul>
+<br>
+<h3 id="components-of-network"><em><strong>Components of Network</strong></em></h3>
+<p>The components of a basic network are:</p>
+<h4 id="peer">PEER</h4>
+<ul>
+<li><strong>peer container</strong>: Runs the peer node</li>
+<li><strong>couch db container</strong>: Stores the state database of peer node</li>
+</ul>
+<h4 id="orderer">ORDERER</h4>
+<ul>
+<li><strong>orderer container</strong>: Solo orderer node to keep dev environment simple. In a real-world network the ordering service is distributed with multiple nodes communicating with each other</li>
+</ul>
+<h4 id="certificate-authority">CERTIFICATE AUTHORITY</h4>
+<ul>
+<li><strong>fabric-ca container</strong>: root certificate authority for issuing membership certificates to all nodes and users. Since we will use single CA, our network is comprised of a single org called <strong>“example dot com”</strong></li>
+</ul>
+<h4 id="tooling">TOOLING</h4>
+<ul>
+<li><strong>fabric-cli container</strong>: This container has some cli tools that help us interact with network nodes to deploy chaincode etc</li>
+</ul>
+<h2 id="setting-up-the-test-network"><em><strong>Setting up the Test Network</strong></em></h2>
+<ul>
+<li>First, create a <strong>channel</strong> on which our <strong>chaincode</strong> (or <strong>smart contract</strong>) will be deployed</li>
+</ul>
+<pre class="hljs"><code><div>$ cd fabric-samples/test-network 
+$ ./network.sh up createChannel -c channel1 -ca 
+
+</div></code></pre>
+<ul>
+<li>Verify that new <strong>containers</strong> are indeed up</li>
+</ul>
+<pre class="hljs"><code><div>$ docker ps 
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot97.png" alt=""></p>
+<ul>
+<li>To create a package for our chaincode, first, let's set up the dependencies</li>
+</ul>
+<pre class="hljs"><code><div>$ cd ../asset-transfer-basic/chaincode-javascript 
+$ npm install 
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot99.png" alt=""></p>
+<ul>
+<li>Go to the <code>test network</code> folder and export the environment variable</li>
+</ul>
+<pre class="hljs"><code><div>$ cd ../../test-network 
+$ export FABRIC_CFG_PATH=$PWD/../config/ 
+$ echo $FABRIC_CFG_PATH 
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot100.png" alt=""></p>
+<ul>
+<li>Now, we must make sure that fabric commands are in the <code>PATH</code>. The following commands adds it to the current session but we should add it to our <code>~/.bashrc</code> file as well for future use</li>
+</ul>
+<pre class="hljs"><code><div>$ peer   # ensure it's there. If not, set the path 
+$ export PATH=$PATH:/home/mdgolammafuz/fabric/fabric-samples/bin/ 
+peer   # should work now
+
+</div></code></pre>
+<ul>
+<li>Now, let’s create a pacakge from our chaincode source</li>
+</ul>
+<pre class="hljs"><code><div>$ peer lifecycle chaincode package basic.tar.gz \
+      --path ../asset-transfer-basic/chaincode-javascript \
+      --lang node \
+      --label basic_1.0
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot101.png" alt=""></p>
+<h2 id="installing-the-chaincode-to-channel"><em><strong>Installing the Chaincode to Channel</strong></em></h2>
+<ul>
+<li>Set the environment variables needed through the provided script</li>
+</ul>
+<pre class="hljs"><code><div>$ source ./scripts/envVar.sh 
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot102.png" alt=""></p>
+<ul>
+<li>Select the first organization</li>
+</ul>
+<pre class="hljs"><code><div>setGlobals 1 
+</div></code></pre>
+<ul>
+<li>Save the certificate file locations for both organizations and the orderer</li>
+</ul>
+<pre class="hljs"><code><div># the $PWD is necessary as the commands need absolute paths, relatives don't work 
+
+$ export ORDERER_CERTFILE=$PWD/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
+$ export ORG1_PEER_CERTFILE=$PWD/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+
+$ export ORG2_PEER_CERTFILE=$PWD/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+
+</div></code></pre>
+<ul>
+<li>Install the package</li>
+</ul>
+<pre class="hljs"><code><div>$ peer lifecycle chaincode install basic.tar.gz
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot103.png" alt=""></p>
+<ul>
+<li>Repeat the same for Organization 2 and take note of the <strong>Package ID</strong> given back. We need this to refer to the chaincode in later commands.</li>
+</ul>
+<pre class="hljs"><code><div>$ setGlobals 2
+$ peer lifecycle chaincode install basic.tar.gz 
+
+$ setGlobals 1  # back to org1 
+
+</div></code></pre>
+<ul>
+<li>Set the package ID env variable</li>
+</ul>
+<pre class="hljs"><code><div># make sure you use the actual package ID and not copy/paste the one below 
+ 
+$ export PKGID=basic_1.0-94c84bb2cc404bab2d945d62dc8d8d3837e2074966495d037b27ecfdf7fe171a
+
+</div></code></pre>
+<ul>
+<li>Once we have that, we need to approve the chaincode definition for organizations</li>
+</ul>
+<pre class="hljs"><code><div>$ peer lifecycle chaincode approveformyorg \
+      -o localhost:7050 \
+      --ordererTLSHostnameOverride  orderer.example.com \
+      --tls --cafile $ORDERER_CERTFILE  \
+      --channelID channel1 \
+      --name basic \
+      --version 1 \
+      --package-id $PKGID \
+      --sequence 1  
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot104.png" alt=""></p>
+<ul>
+<li>Do the same for the second organization</li>
+</ul>
+<pre class="hljs"><code><div>$ setGlobals 2 
+
+$ peer lifecycle chaincode approveformyorg \
+      -o localhost:7050 \
+      --ordererTLSHostnameOverride  orderer.example.com \
+      --tls --cafile $ORDERER_CERTFILE  \
+      --channelID channel1 \
+      --name basic \
+      --version 1 \
+      --package-id $PKGID \
+      --sequence 1  
+
+
+</div></code></pre>
+<ul>
+<li>Let’s commit the chnages made to the chaincode. We have to specify peers here explicitly</li>
+</ul>
+<pre class="hljs"><code><div>$ peer lifecycle chaincode commit \
+      -o localhost:7050 \
+      --ordererTLSHostnameOverride orderer.example.com \
+      --tls --cafile $ORDERER_CERTFILE \
+      --channelID channel1 --name basic \
+      --peerAddresses localhost:7051 --tlsRootCertFiles $ORG1_PEER_CERTFILE \
+      --peerAddresses localhost:9051 --tlsRootCertFiles $ORG2_PEER_CERTFILE \
+      --version 1 --sequence 1  
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot105.png" alt=""></p>
+<ul>
+<li>And confirm that it went through.</li>
+</ul>
+<pre class="hljs"><code><div>$ peer lifecycle chaincode querycommitted \
+      --channelID channel1 --name basic \
+      --cafile  $ORDERER_CERTFILE
+</div></code></pre>
+<ul>
+<li>Finally, see <code>docker ps</code> to check if the chaincode containers running</li>
+</ul>
+<p><code>$ docker ps</code></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot106.png" alt=""></p>
+<h2 id="how-to-clean-everything">How to Clean Everything</h2>
+<pre class="hljs"><code><div># See what stuff is avaialble 
+$ docker images -a 
+$ docker volume ls 
+
+# Remove ALL the docker containers (Not just for fabric, ALL!!)
+$ docker rm -vf $(docker ps -a -q) 
+
+# .. and the images 
+$ docker rmi -f $(docker images -a -q) 
+
+# Volumes are not deleted by default 
+$ docker volume ls 
+
+# ... but we can get rid of those too 
+$ docker system prune -a --volumes 
+
+# Verify that everything is indeed gone 
+$ docker volume ls 
+$ docker images 
+$ docker container ls 
+
+# And just for final measure 
+$ docker system prune --all 
+
+
+# finally, get rid of the files as well. 
+# Make sure you copy your code before doing this (if any)   
+$ cd ~/fabric 
+$ sudo rm -rf fabric-samples
+</div></code></pre>
+<h2 id="interacting-with-the-smart-contract-through-code"><em><strong>Interacting with the Smart Contract through Code</strong></em></h2>
+<ul>
+<li>We will create a simple project based on the example provided in <code>fabric-samples/asset-transfer-basic/application-javascript</code>. Let’s start by creating a node project in our fabric folder.</li>
+</ul>
+<pre class="hljs"><code><div>$ cd ~/fabric/fabric-samples 
+$ mdkir asset-app 
+$ cd asset-app 
+
+# initialize a node project 
+$ npm init 
+
+</div></code></pre>
+<ul>
+<li>Install the required packages in this project</li>
+</ul>
+<pre class="hljs"><code><div>$ npm install fabric-ca-client 
+$ npm install fabric-network 
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot111.png" alt=""></p>
+<h3 id="helper-functions">Helper Functions</h3>
+<p>We need to first create some helper function to get the organization’s configurations</p>
+<pre class="hljs"><code><div>exports.buildCCPOrg1 = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ 
+    <span class="hljs-keyword">const</span> ccpPath = path.resolve(__dirname, <span class="hljs-string">'..'</span>, <span class="hljs-string">'test-network'</span>, 
+    <span class="hljs-string">'organizations'</span>, <span class="hljs-string">'peerOrganizations'</span>, <span class="hljs-string">'org1.example.com'</span>, 
+    <span class="hljs-string">'connection-org1.json'</span>); 
+
+    <span class="hljs-keyword">const</span> fileExists = fs.existsSync(ccpPath); 
+    <span class="hljs-keyword">if</span>(!fileExists) { 
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"Cannot find: ${ccpPath}"</span>); 
+    }
+
+    <span class="hljs-keyword">const</span> contents = fs.readFileSync(ccpPath, <span class="hljs-string">'utf8'</span>); 
+
+    <span class="hljs-keyword">const</span> ccp = <span class="hljs-built_in">JSON</span>.parse(contents); 
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Loaded network config from: ${ccpPath}"</span>); 
+
+    <span class="hljs-keyword">return</span> ccp; 
+}
+
+</div></code></pre>
+<p>We then create a function for creating a wallet. This wallet will hold the keys and other crypto material used througout the code. The wallet can store in-memory (for testing) or in a folder (which is what we will use)</p>
+<pre class="hljs"><code><div>exports.buildWallet = <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Wallets, walletPath</span>) </span>{ 
+    <span class="hljs-keyword">let</span> wallet; 
+
+    <span class="hljs-keyword">if</span> (walletPath) { 
+        wallet = <span class="hljs-keyword">await</span> Wallets.newFileSystemWallet(walletPath);     
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Built wallet from ${walletPath}"</span>); 
+    } <span class="hljs-keyword">else</span> { 
+        wallet = <span class="hljs-keyword">await</span> Wallets.newInMemoryWallet(); 
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Build in-memory wallet"</span>); 
+    }
+
+    <span class="hljs-keyword">return</span> wallet; 
+}
+
+</div></code></pre>
+<p>There’s also a function to pretty-print javascript. This is straight-forward.</p>
+<pre class="hljs"><code><div>
+exports.prettyJSONString = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">inputString</span>) </span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.stringify(<span class="hljs-built_in">JSON</span>.parse(inputString), <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>);
+}
+</div></code></pre>
+<h3 id="performing-administrative-actions">Performing Administrative Actions</h3>
+<p>There are some functions that will set up the admins and users. Logic for this is in the <code>caActions.js</code>. Let’s take a look at those here.</p>
+<p>First function is to load the credentials used for performing actions.</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">buildCAClient</span>(<span class="hljs-params">FabricCAServices, ccp, caHostName</span>) </span>{ 
+    <span class="hljs-keyword">const</span> caInfo = ccp.certificateAuthorities(caHostName); 
+    <span class="hljs-keyword">const</span> caTLSCACerts = caInfo.tlsCACerts.pem; 
+    <span class="hljs-keyword">const</span> caClient = <span class="hljs-keyword">new</span> FabricCAServices(caInfo.url, {
+        <span class="hljs-attr">trustedRoots</span>: caTLSCACerts, <span class="hljs-attr">verify</span>: <span class="hljs-literal">false</span> 
+    }, caInfo.caName); 
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Built a CA client named: ${caInfo.caName}"</span>); 
+    <span class="hljs-keyword">return</span> caClient; 
+};
+
+</div></code></pre>
+<p>This function will be called with the following information:</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">let</span> ccp = helper.buildCCPOrg1(); 
+
+<span class="hljs-keyword">const</span> caClient = buildCAClient(
+                    FabricCAServices, 
+                    ccp, 
+                    <span class="hljs-string">'ca.org1.example.com'</span>
+                ); 
+
+</div></code></pre>
+<p>We also need to create an administrative account. This will be a onetime task. We first create the enrollment information along with its X.509 certificate. Then we put it in the wallet.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">enrollAdmin</span>(<span class="hljs-params">caClient, wallet, orgMspId</span>) </span>{ 
+    <span class="hljs-comment">// ... </span>
+        
+        <span class="hljs-keyword">const</span> enrollment = <span class="hljs-keyword">await</span> caClient.enroll({ 
+            <span class="hljs-attr">enrollmentID</span>: adminUserId, 
+            <span class="hljs-attr">enrollmentSecret</span>: adminUserPasswd
+        }); 
+
+        <span class="hljs-keyword">const</span> x509Identity = { 
+            <span class="hljs-attr">credentials</span>: {
+                <span class="hljs-attr">certificate</span>: enrollment.certificate, 
+                <span class="hljs-attr">privateKey</span>: enrollment.key.toBytes()
+            }, 
+            <span class="hljs-attr">mspId</span>: orgMspId, 
+            <span class="hljs-attr">type</span>: <span class="hljs-string">'X.509'</span>
+        }; 
+
+        <span class="hljs-keyword">await</span> wallet.put(adminUserId, x509Identity);
+    <span class="hljs-comment">// ... </span>
+};
+
+</div></code></pre>
+<p>Creating an everyday user is similar but it’s done more often. We load the admin credentials, use those to create the user and save the user’s credentials in the wallet.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">registerAndEnrollUser</span>(<span class="hljs-params">caClient, wallet, orgMspId, userId, affiliation</span>)</span>{ 
+    <span class="hljs-comment">// ... </span>
+
+    <span class="hljs-comment">// Must use an admin to register a new user</span>
+    <span class="hljs-keyword">const</span> adminIdentity = <span class="hljs-keyword">await</span> wallet.get(adminUserId);
+
+    <span class="hljs-comment">// ... </span>
+
+    <span class="hljs-comment">// build a user object for authenticating with the CA</span>
+    <span class="hljs-keyword">const</span> provider = wallet.getProviderRegistry().
+                        getProvider(adminIdentity.type);
+    <span class="hljs-keyword">const</span> adminUser = <span class="hljs-keyword">await</span> provider.getUserContext(adminIdentity, adminUserId);
+
+
+    <span class="hljs-keyword">const</span> secret = <span class="hljs-keyword">await</span> caClient.register({
+                          <span class="hljs-attr">affiliation</span>: affiliation,
+                          <span class="hljs-attr">enrollmentID</span>: userId,
+                          <span class="hljs-attr">role</span>: <span class="hljs-string">'client'</span>
+    }, adminUser);
+
+    <span class="hljs-keyword">const</span> enrollment = <span class="hljs-keyword">await</span> caClient.enroll({
+      <span class="hljs-attr">enrollmentID</span>: userId,
+      <span class="hljs-attr">enrollmentSecret</span>: secret
+    });
+
+    <span class="hljs-keyword">const</span> x509Identity = {
+      <span class="hljs-attr">credentials</span>: {
+        <span class="hljs-attr">certificate</span>: enrollment.certificate,
+        <span class="hljs-attr">privateKey</span>: enrollment.key.toBytes(),
+      },
+      <span class="hljs-attr">mspId</span>: orgMspId,
+      <span class="hljs-attr">type</span>: <span class="hljs-string">'X.509'</span>,
+    };
+
+    <span class="hljs-keyword">await</span> wallet.put(userId, x509Identity);
+
+    <span class="hljs-comment">// ...</span>
+};
+
+</div></code></pre>
+<p>There are two more function <code>getAdmin</code> and <code>getUser</code> which are basically interfaces for the above two functions.</p>
+<p>Finally, we have some helper code so that we can call these functions from the command line.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">let</span> args = process.argv; 
+
+<span class="hljs-keyword">if</span> (args[<span class="hljs-number">2</span>] === <span class="hljs-string">'admin'</span>) { 
+    getAdmin(); 
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (args[<span class="hljs-number">2</span>] === <span class="hljs-string">'user'</span>) { 
+    <span class="hljs-keyword">let</span> org1UserId = args[<span class="hljs-number">3</span>]; 
+    getUser(org1UserId); 
+} <span class="hljs-keyword">else</span> { 
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Invalid command"</span>);
+}
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot112.png" alt=""></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot114.png" alt=""></p>
+<h3 id="performing-actions-on-the-ledger-itself">Performing Actions on the Ledger Itself</h3>
+<p>Once we have the users and admins, we can perform the actual chaincode logic. Logic for this is in the <code>ledgerActions.js</code>.</p>
+<p>Relevant fragments of code are discussed here. First part is the connection information. Think of this as being similar to creating a database connection.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> ccp = helper.buildCCPOrg1();
+<span class="hljs-keyword">const</span> wallet = <span class="hljs-keyword">await</span> helper.buildWallet(Wallets, walletPath);
+<span class="hljs-keyword">const</span> gateway = <span class="hljs-keyword">new</span> Gateway();
+
+<span class="hljs-keyword">await</span> gateway.connect(ccp, {
+            wallet,
+            <span class="hljs-attr">identity</span>: org1UserId,
+            <span class="hljs-attr">discovery</span>: { <span class="hljs-attr">enabled</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">asLocalhost</span>: <span class="hljs-literal">true</span> }
+        });
+
+</div></code></pre>
+<p>Then we establish the connection to the actual chaincode. Again, think of this as selecting a specific database from our connection.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> network = <span class="hljs-keyword">await</span> gateway.getNetwork(channelName);  <span class="hljs-comment">// channel1 </span>
+<span class="hljs-keyword">const</span> contract = network.getContract(chaincodeName);    <span class="hljs-comment">// basic</span>
+
+</div></code></pre>
+<p>Using the actual chaincode functions is no extremely easy. Simply call the relevant function like so:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">await</span> contract.submitTransaction(<span class="hljs-string">'InitLedger'</span>); 
+
+</div></code></pre>
+<p>This function essentially calls the function in the chaincode. This can be seen as the <code>InitLedger</code> function in <code>fabric-samples/asset-transfer-basic/chaincode-javascript/lib/assetTransfer.js</code>.</p>
+<p>The only difference is that since we are using <code>subimtTransaction</code>, this will go to the orderer and the whole voting and consensus algorithm will work and the transaction will be added to the blockchain. From a programming perspective, all of this is hidden behind this one simple function call.</p>
+<p>Very similarly, we have the <code>GetAllAssets</code> and <code>ReadAsset</code> functions.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> contract.evaluateTransaction(<span class="hljs-string">'GetAllAssets'</span>); 
+<span class="hljs-comment">// ... </span>
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> contract.evaluateTransaction(<span class="hljs-string">'ReadAsset'</span>, asset); 
+<span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">await</span> contract.submitTransaction(<span class="hljs-string">'CreateAsset'</span>, 
+                                <span class="hljs-string">'asset101'</span>, 
+                                <span class="hljs-string">'violet'</span>, 
+                                <span class="hljs-string">'5'</span>, 
+                                <span class="hljs-string">'Snnorre 3'</span>, 
+                                <span class="hljs-string">'1300'</span>); 
+
+</div></code></pre>
+<p>The file also has some code fragments that allow passing comments into the code. So, we can call it using the following commands.</p>
+<pre class="hljs"><code><div>node ledgerActions.js GetAllAssets 
+node ledgerActions.js ReadAsset asset1 
+node ledgerActions.js CreateAsset 
+
+</div></code></pre>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot115.png" alt=""></p>
+<p><img src="file:///home/mdgolammafuz/fabric/assets/Screenshot117.png" alt="">
+<br/></p>
+<h1 id="references">References</h1>
+<br>
+<ol>
+<li>
+<p><a href="https://www.educative.io/courses/hands-on-blockchain-hyperledger-fabric">Become a Blockchain Developer (A course on <strong>edcucative.io</strong>)</a>
+<br/></p>
+</li>
+<li>
+<p><a href="https://www.udemy.com/course/hyperledger-fabric-composer-first-practical-blockchain/">Hyperledger Fabric 2.x - First Practical Blockchain: A course instructed by <strong>Mohammad Nauman</strong> on <strong>Udemy</strong></a>
+<br/></p>
+</li>
+<li>
+<p><a href="https://hyperledger-fabric.readthedocs.io/en/release-2.2/chaincode4ade.html#">HYPERLEDGER FABRIC: Writing Your First Chaincode</a>
+<br/></p>
+</li>
+<li>
+<p><strong>Hands-On Smart Contract Development with Hyperledger Fabric V2</strong>
+by Matt Zand, Xun Wu, and Mark Anthony Morris
+Copyright © 2021 WEG2G LLC. All rights reserved.
+Printed in the United States of America.
+Published by O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472.</p>
+</li>
+</ol>
+
+</body>
+</html>
